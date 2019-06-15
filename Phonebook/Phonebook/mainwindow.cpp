@@ -89,8 +89,8 @@ void MainWindow::find()
         status->setText("");
         return;
     }
-    //QList<QStandardItem*> list = model->findItems(str, Qt::MatchStartsWith, 0);
-    findList = model->findItems(str, Qt::MatchContains, 0);
+    //findList = model->findItems(str, Qt::MatchContains, 0);
+    findList = model->findItems(str, Qt::MatchStartsWith, 0);
 
     if (model_buf != nullptr)
         delete model_buf;
@@ -111,7 +111,6 @@ void MainWindow::find()
         model_buf->setItem(count, 0, new QStandardItem(findList.at(i)->text()));
         model_buf->setItem(count, 1, new QStandardItem(model->item(findList.at(i)->row(), findList.at(i)->column() + 1)->text()));
         count++;
-        //qDebug() << list.at(i)->column() << "\t" << list.at(i)->row();
     }
     ui->tableView->setModel(model_buf);
     ui->tableView->resizeRowsToContents();
