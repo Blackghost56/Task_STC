@@ -27,7 +27,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QRadioButton" name="mode_radioButton">
+          <widget class="QRadioButton" name="mode_radioButton_1">
            <property name="text">
             <string>Two players</string>
            </property>

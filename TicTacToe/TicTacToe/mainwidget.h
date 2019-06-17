@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include "playingfield.h"
+#include "enum.h"
+#include <QDebug>
+#include "wincheck.h"
 
 namespace Ui {
 class MainWidget;
@@ -22,6 +25,8 @@ private slots:
     void on_stop_pushButton_clicked();
 
     void on_fild_size_spinBox_valueChanged(int arg1);
+
+    void cellPressedV(QVector<qint8> cellState);
 
 private:
     Ui::MainWidget *ui;

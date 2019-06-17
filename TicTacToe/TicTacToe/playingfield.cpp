@@ -81,7 +81,7 @@ void PlayingField::drawWin(QPainter &painter)
     int x2 = cell_w * (winEndCell % size);
     int y2 = cell_h * (winEndCell / size);
 
-    painter.setPen(QPen(Qt::red, 5));
+    painter.setPen(QPen(QColor(200, 0, 0), 5));
     painter.drawLine(QPointF(x1 + halfCell_w, y1 + halfCell_h), QPointF(x2 + halfCell_w, y2 + halfCell_h));
 
     // text

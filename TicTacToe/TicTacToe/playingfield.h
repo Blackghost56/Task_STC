@@ -5,12 +5,13 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QDebug>
+#include "enum.h"
 
 class PlayingField : public QWidget
 {
     Q_OBJECT
 public:
-    enum PLAYER_ENUM: qint8 {ZERO = 1, CROSS = 2, NOPE = 0};
+    //enum PLAYER_ENUM: qint8 {ZERO = 1, CROSS = 2, NOPE = 0};
 private:
     enum STATE_ENUM: bool {ENABLE = true, DISABLE = false};
     //QFont defaulFont = QFont("Helvetica [Cronyx]", 25, QFont::Normal);

@@ -27,11 +27,15 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwidget.cpp \
-    playingfield.cpp
+    playingfield.cpp \
+    wincheck.cpp
 
 HEADERS += \
         mainwidget.h \
-    playingfield.h
+    playingfield.h \
+    logicinterface.h \
+    wincheck.h \
+    enum.h
 
 FORMS += \
         mainwidget.ui

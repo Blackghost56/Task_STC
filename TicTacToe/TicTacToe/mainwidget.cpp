@@ -18,9 +18,10 @@ MainWidget::MainWidget(QWidget *parent) :
     //ui->play_field_widget->setCell(2, 1);
     //ui->play_field_widget->setCell(4, 2);
     //ui->play_field_widget->clear();
-    //ui->play_field_widget->setActivePlayer(PlayingField::CROSS);
+    ui->play_field_widget->setActivePlayer(CROSS);
     //ui->play_field_widget->setCellActivePlayer(3);
     //ui->play_field_widget->drawWin(0, 3, "Player 1 win!");
+    connect(ui->play_field_widget, &PlayingField::cellPressedV, this, &MainWidget::cellPressedV);
 }
 
 MainWidget::~MainWidget()
@@ -39,6 +40,16 @@ void MainWidget::on_start_pushButton_clicked()
     ui->stop_pushButton->setEnabled(true);
     ui->play_field_widget->enable();
     ui->play_field_widget->clear();
+
+    if (ui->mode_radioButton_1->isChecked()){
+
+    }
+    if (ui->mode_radioButton_2->isChecked()){
+
+    }
+    if (ui->mode_radioButton_3->isChecked()){
+
+    }
 }
 
 void MainWidget::on_stop_pushButton_clicked()
@@ -60,4 +71,18 @@ void MainWidget::on_fild_size_spinBox_valueChanged(int arg1)
     ui->VC_spinBox->setMaximum(arg1);
     if (ui->VC_spinBox->value() > arg1)
         ui->VC_spinBox->setValue(arg1);
+}
+
+void MainWidget::cellPressedV(QVector<qint8> cellState)
+{
+    WinCheck cheker(ui->fild_size_spinBox->value(), ui->VC_spinBox->value());
+    bool state = cheker.check(cellState, CROSS);
+    qDebug() << state;
+    if (state){
+        int begin;
+        int end;
+        cheker.getBeginEnd(begin, end);
+        ui->play_field_widget->drawWin(begin, end, "Player win!");
+    }
+
 }
