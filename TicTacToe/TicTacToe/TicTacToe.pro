@@ -28,14 +28,18 @@ SOURCES += \
         main.cpp \
         mainwidget.cpp \
     playingfield.cpp \
-    wincheck.cpp
+    wincheck.cpp \
+    playervsplayer.cpp \
+    playervsais.cpp
 
 HEADERS += \
         mainwidget.h \
     playingfield.h \
     logicinterface.h \
     wincheck.h \
-    enum.h
+    enum.h \
+    playervsplayer.h \
+    playervsais.h
 
 FORMS += \
         mainwidget.ui

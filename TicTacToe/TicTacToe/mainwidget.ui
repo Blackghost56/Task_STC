@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>485</width>
-    <height>325</height>
+    <width>529</width>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,37 @@
      <property name="title">
       <string/>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="start_pushButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Start game</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="stop_pushButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Stop game</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
       <item>
        <widget class="QGroupBox" name="mode_groupBox">
         <property name="title">
@@ -54,7 +84,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QFormLayout" name="fild_size_formLayout">
+       <layout class="QFormLayout" name="formLayout">
         <item row="0" column="0">
          <widget class="QLabel" name="fild_size_label">
           <property name="text">
@@ -65,34 +95,39 @@
         <item row="0" column="1">
          <widget class="QSpinBox" name="fild_size_spinBox"/>
         </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QFormLayout" name="VC_formLayout">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QLabel" name="VC_label">
           <property name="text">
            <string>Victory condition:</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="1" column="1">
          <widget class="QSpinBox" name="VC_spinBox"/>
         </item>
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="start_pushButton">
-        <property name="text">
-         <string>Start game</string>
+       <widget class="QGroupBox" name="FM_groupBox">
+        <property name="title">
+         <string>First move</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="stop_pushButton">
-        <property name="text">
-         <string>Stop game</string>
-        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QRadioButton" name="FM_radioButton_1">
+           <property name="text">
+            <string>Player</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="FM_radioButton_2">
+           <property name="text">
+            <string>PC</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
@@ -121,8 +156,8 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>200</width>
-       <height>200</height>
+       <width>350</width>
+       <height>350</height>
       </size>
      </property>
     </widget>

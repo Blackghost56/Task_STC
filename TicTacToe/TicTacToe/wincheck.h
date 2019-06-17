@@ -18,7 +18,8 @@ private:
 public:
     explicit WinCheck(const int size, const int victorySize, QObject *parent = nullptr);
     void setVictorySize(const int victorySize);
-    bool check(const QVector<qint8> &data, const quint8 player);
+    bool check(const QVector<qint8> &data, const qint8 player);
+    bool checkMoves(const QVector<qint8> &data);
     void getBeginEnd(int &begin, int &end);
 
 signals:

@@ -45,6 +45,8 @@ void PlayingField::paintEvent(QPaintEvent *)
     if(winDraw)
         drawWin(painter);
     // ---------
+    if(drawTextF)
+        drawText(painter);
 
     painter.end();
 }
@@ -82,18 +84,20 @@ void PlayingField::drawWin(QPainter &painter)
     int y2 = cell_h * (winEndCell / size);
 
     painter.setPen(QPen(QColor(200, 0, 0), 5));
-    painter.drawLine(QPointF(x1 + halfCell_w, y1 + halfCell_h), QPointF(x2 + halfCell_w, y2 + halfCell_h));
+    painter.drawLine(QPointF(x1 + halfCell_w, y1 + halfCell_h), QPointF(x2 + halfCell_w, y2 + halfCell_h));   
+}
 
-    // text
+void PlayingField::drawText(QPainter &painter)
+{
     painter.setPen(QPen(Qt::red, 4));
     int font_size_def = 10;
     QFont font("Helvetica [Cronyx]", font_size_def, QFont::Normal);
     QFontMetrics fm(font);
-    double coeff = double(width()) / double(fm.width(winText));
+    double coeff = double(width()) / double(fm.width(text));
     font.setPointSize(int(coeff * font_size_def));
     fm = QFontMetrics(font);
     painter.setFont(font);
-    painter.drawText(QPointF((width() - fm.width(winText)) / 2, height() / 2), winText);
+    painter.drawText(QPointF((width() - fm.width(text)) / 2, height() / 2), text);
 }
 
 void PlayingField::mousePressEvent(QMouseEvent *event)
@@ -110,7 +114,7 @@ void PlayingField::mousePressEvent(QMouseEvent *event)
             repaint();
             emit cellPressed(num);
             emit cellPressed(num, activePlayer);
-            emit cellPressedV(cellState);
+            emit cellPressedV(cellState, activePlayer);
         }
     }
 }
@@ -130,6 +134,7 @@ void PlayingField::clear()
     for (int i = 0; i < cellState.size(); i++)
         cellState[i] = NOPE;
     winDraw = false;
+    drawTextF = false;
     repaint();
 }
 
@@ -154,9 +159,17 @@ void PlayingField::setActivePlayer(const qint8 player)
 
 void PlayingField::drawWin(const int beginCell, const int endCell, const QString &str)
 {
-    winText = str;
+    text = str;
     winBeginCell = beginCell;
     winEndCell = endCell;
     winDraw = true;
+    drawTextF = true;
+    repaint();
+}
+
+void PlayingField::drawStandoff(const QString &str)
+{
+    text = str;
+    drawTextF = true;
     repaint();
 }

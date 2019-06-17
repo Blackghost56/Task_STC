@@ -11,11 +11,13 @@ void WinCheck::setVictorySize(const int victorySize)
     this->victorySize = victorySize;
 }
 
-bool WinCheck::check(const QVector<qint8> &data, const quint8 player)
+bool WinCheck::check(const QVector<qint8> &data, const qint8 player)
 {
     int x;
-    int y ;
+    int y;
     bool flag;
+    begin = -1;
+    end = -1;
 
     for (int i = 0; i < data.size(); i++) {
         x = i % size;
@@ -83,6 +85,15 @@ bool WinCheck::check(const QVector<qint8> &data, const quint8 player)
         }
     }
     return false;
+}
+
+bool WinCheck::checkMoves(const QVector<qint8> &data)
+{
+    for (auto i:data) {
+        if (i == NOPE)
+            return false;
+    }
+    return true;
 }
 
 void WinCheck::getBeginEnd(int &begin, int &end)
