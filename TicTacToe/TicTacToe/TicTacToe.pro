@@ -30,7 +30,8 @@ SOURCES += \
     playingfield.cpp \
     wincheck.cpp \
     playervsplayer.cpp \
-    playervsais.cpp
+    playervsais.cpp \
+    playervsaia.cpp
 
 HEADERS += \
         mainwidget.h \
@@ -39,7 +40,8 @@ HEADERS += \
     wincheck.h \
     enum.h \
     playervsplayer.h \
-    playervsais.h
+    playervsais.h \
+    playervsaia.h
 
 FORMS += \
         mainwidget.ui

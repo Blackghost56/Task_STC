@@ -11,10 +11,11 @@ MainWidget::MainWidget(QWidget *parent) :
     ui->mode_radioButton_1->setChecked(true);
     ui->FM_radioButton_1->setChecked(true);
     ui->fild_size_spinBox->setValue(defaultSize);
-    ui->fild_size_spinBox->setMinimum(3);
+    ui->fild_size_spinBox->setMinimum(minSize);
+    ui->fild_size_spinBox->setMaximum(maxSize);
     ui->play_field_widget->setSize(defaultSize);
     ui->VC_spinBox->setValue(defaultSize);
-    ui->VC_spinBox->setMinimum(3);
+    ui->VC_spinBox->setMinimum(minSize);
     ui->VC_spinBox->setMaximum(ui->fild_size_spinBox->value());
     ui->FM_groupBox->setVisible(false);
 }
@@ -46,7 +47,8 @@ void MainWidget::on_start_pushButton_clicked()
         connect(playerVsAIs, &PlayerVsAIS::endGame, ui->stop_pushButton, &QPushButton::click);
     }
     if (ui->mode_radioButton_3->isChecked()){
-
+        playerVsAIa = new PlayerVsAIA(ui->play_field_widget, ui->fild_size_spinBox->value(), ui->VC_spinBox->value(), firstPlayer, this);
+        connect(playerVsAIa, &PlayerVsAIA::endGame, ui->stop_pushButton, &QPushButton::click);
     }
 }
 
@@ -69,6 +71,10 @@ void MainWidget::on_stop_pushButton_clicked()
     if (playerVsAIs != nullptr){
         delete playerVsAIs;
         playerVsAIs = nullptr;
+    }
+    if (playerVsAIa != nullptr){
+        delete playerVsAIa;
+        playerVsAIa = nullptr;
     }
 }
 

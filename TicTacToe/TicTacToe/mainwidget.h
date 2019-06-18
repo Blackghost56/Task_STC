@@ -8,6 +8,7 @@
 #include "wincheck.h"
 #include "playervsplayer.h"
 #include "playervsais.h"
+#include "playervsaia.h"
 
 namespace Ui {
 class MainWidget;
@@ -41,10 +42,13 @@ private slots:
 private:
     enum FIRST_MOVE_ENUM: qint8 {PLAYER = 1, PC = 2};
     Ui::MainWidget *ui;
-    int defaultSize = 4;
+    const int defaultSize = 3;
+    const int minSize = 3;
+    const int maxSize = 20;
     FIRST_MOVE_ENUM firstPlayer = PLAYER;
     PlayerVsPlayer  *playerVsPlayer = nullptr;
     PlayerVsAIS     *playerVsAIs = nullptr;
+    PlayerVsAIA     *playerVsAIa = nullptr;
 };
 
 #endif // MAINWIDGET_H

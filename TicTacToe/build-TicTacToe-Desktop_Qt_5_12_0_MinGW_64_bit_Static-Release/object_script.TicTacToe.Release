@@ -1,0 +1,14 @@
+release/main.o
+release/mainwidget.o
+release/playingfield.o
+release/wincheck.o
+release/playervsplayer.o
+release/playervsais.o
+release/playervsaia.o
+release/tictactoe_plugin_import.o
+release/moc_mainwidget.o
+release/moc_playingfield.o
+release/moc_wincheck.o
+release/moc_playervsplayer.o
+release/moc_playervsais.o
+release/moc_playervsaia.o

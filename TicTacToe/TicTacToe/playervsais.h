@@ -5,7 +5,6 @@
 #include <QRandomGenerator>
 #include "playingfield.h"
 #include "wincheck.h"
-//#include <QDebug>
 
 class PlayerVsAIS : public QObject
 {
@@ -19,6 +18,7 @@ private:
     WinCheck *checker;
 
     int AI(QVector<qint8> &cellState, qint8 player);
+    QVector<int> emptyIndex(QVector<qint8> &cellState);
 
 public:
     explicit PlayerVsAIS(PlayingField *field, const int size, const int victorySize, const qint8 playerSymbol, QObject *parent = nullptr);

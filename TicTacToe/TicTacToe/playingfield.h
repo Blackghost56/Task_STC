@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QPainter>
 #include <QMouseEvent>
-#include <QDebug>
 #include "enum.h"
 
 class PlayingField : public QWidget

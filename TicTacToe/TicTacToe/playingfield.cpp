@@ -62,9 +62,11 @@ void PlayingField::drawCell(QPainter &paint, const qreal x1, const qreal y1, con
 
     switch (state) {
     case ZERO:
+        paint.setPen(QPen(QColor(0, 150, 0), 6));
         paint.drawEllipse(QRectF(bx1, by1, bx2 - bx1, by2 - by1));
         break;
     case CROSS:
+        paint.setPen(QPen(QColor(0, 0, 150), 6));
         paint.drawLine(QPointF(bx1, by1), QPointF(bx2, by2));
         paint.drawLine(QPointF(bx1, by2), QPointF(bx2, by1));
         break;
@@ -83,21 +85,25 @@ void PlayingField::drawWin(QPainter &painter)
     int x2 = cell_w * (winEndCell % size);
     int y2 = cell_h * (winEndCell / size);
 
-    painter.setPen(QPen(QColor(200, 0, 0), 5));
+    painter.setPen(QPen(QColor(200, 0, 50, 200), 10));
     painter.drawLine(QPointF(x1 + halfCell_w, y1 + halfCell_h), QPointF(x2 + halfCell_w, y2 + halfCell_h));   
 }
 
 void PlayingField::drawText(QPainter &painter)
 {
-    painter.setPen(QPen(Qt::red, 4));
+    painter.setBrush(QColor(10, 10, 10, 100));
+    painter.setPen(QPen(Qt::NoPen));
+    painter.drawRoundRect(0, height() / 3, width(), height() / 3);
+
+    painter.setPen(QPen(QColor(255, 0, 0), 4));
     int font_size_def = 10;
     QFont font("Helvetica [Cronyx]", font_size_def, QFont::Normal);
     QFontMetrics fm(font);
-    double coeff = double(width()) / double(fm.width(text));
+    double coeff = double(width()) / double(fm.width(text)) * 0.9;
     font.setPointSize(int(coeff * font_size_def));
     fm = QFontMetrics(font);
     painter.setFont(font);
-    painter.drawText(QPointF((width() - fm.width(text)) / 2, height() / 2), text);
+    painter.drawText(QPointF((width() - fm.width(text)) / 2, height() / 2 + height() / 12), text);
 }
 
 void PlayingField::mousePressEvent(QMouseEvent *event)

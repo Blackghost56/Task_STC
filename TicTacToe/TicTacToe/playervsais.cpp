@@ -53,6 +53,7 @@ void PlayerVsAIS::cellPressedV(QVector<qint8> cellState, qint8 player)
         checker->getBeginEnd(begin, end);
         playField->drawWin(begin, end, "You lose!");
         emit endGame();
+        return;
     }
     if (checker->checkMoves(cellState)){
         playField->drawStandoff("Standoff!");
@@ -64,7 +65,7 @@ void PlayerVsAIS::cellPressedV(QVector<qint8> cellState, qint8 player)
 
 int PlayerVsAIS::AI(QVector<qint8> &cellState, qint8 player)
 {
-    int random = int(QRandomGenerator::global()->bounded(quint32(size * size)));
+    /*int random = int(QRandomGenerator::global()->bounded(quint32(size * size)));
     bool flag = true;
     while (flag){
         if ((cellState.at(random) != playerSymbol) && (cellState.at(random) != AISymbol)){
@@ -73,6 +74,20 @@ int PlayerVsAIS::AI(QVector<qint8> &cellState, qint8 player)
            return random;
         }
         random = int(QRandomGenerator::global()->bounded(quint32(size * size)));
+    }*/
+    QVector<int> vec = emptyIndex(cellState);
+    int random = int(QRandomGenerator::global()->bounded(quint32(vec.size())));
+    cellState[vec.at(random)] = AISymbol;
+
+    return vec.at(random);
+}
+
+QVector<int> PlayerVsAIS::emptyIndex(QVector<qint8> &cellState)
+{
+    QVector<int> vec;
+    for (int i = 0; i < cellState.size(); i++) {
+        if (cellState.at(i) == NOPE)
+            vec.push_back(i);
     }
-    return 0;
+    return vec;
 }
