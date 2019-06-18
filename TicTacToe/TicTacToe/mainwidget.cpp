@@ -11,11 +11,11 @@ MainWidget::MainWidget(QWidget *parent) :
     ui->mode_radioButton_1->setChecked(true);
     ui->FM_radioButton_1->setChecked(true);
     ui->fild_size_spinBox->setValue(defaultSize);
-    ui->fild_size_spinBox->setMinimum(minSize);
-    ui->fild_size_spinBox->setMaximum(maxSize);
+    ui->fild_size_spinBox->setMinimum(minSizeDef);
+    ui->fild_size_spinBox->setMaximum(maxSizeDef);
     ui->play_field_widget->setSize(defaultSize);
     ui->VC_spinBox->setValue(defaultSize);
-    ui->VC_spinBox->setMinimum(minSize);
+    ui->VC_spinBox->setMinimum(minSizeDef);
     ui->VC_spinBox->setMaximum(ui->fild_size_spinBox->value());
     ui->FM_groupBox->setVisible(false);
 }
@@ -91,18 +91,26 @@ void MainWidget::on_mode_radioButton_1_clicked(bool checked)
 {
     if (checked == true)
         ui->FM_groupBox->setVisible(false);
+    ui->fild_size_spinBox->setMaximum(maxSizeDef);
+    ui->VC_spinBox->setMaximum(maxSizeDef);
 }
 
 void MainWidget::on_mode_radioButton_2_clicked(bool checked)
 {
     if (checked == true)
         ui->FM_groupBox->setVisible(true);
+    ui->fild_size_spinBox->setMaximum(maxSizeDef);
+    ui->VC_spinBox->setMaximum(maxSizeDef);
 }
 
 void MainWidget::on_mode_radioButton_3_clicked(bool checked)
 {
     if (checked == true)
         ui->FM_groupBox->setVisible(true);
+    ui->fild_size_spinBox->setMaximum(maxSizeAdv);
+    ui->fild_size_spinBox->setValue(maxSizeAdv);
+    ui->VC_spinBox->setMaximum(maxSizeAdv);
+    ui->VC_spinBox->setValue(maxSizeAdv);
 }
 
 void MainWidget::on_FM_radioButton_1_clicked(bool checked)

@@ -43,8 +43,9 @@ private:
     enum FIRST_MOVE_ENUM: qint8 {PLAYER = 1, PC = 2};
     Ui::MainWidget *ui;
     const int defaultSize = 3;
-    const int minSize = 3;
-    const int maxSize = 20;
+    const int minSizeDef = 3;
+    const int maxSizeDef = 20;
+    const int maxSizeAdv = 3;
     FIRST_MOVE_ENUM firstPlayer = PLAYER;
     PlayerVsPlayer  *playerVsPlayer = nullptr;
     PlayerVsAIS     *playerVsAIs = nullptr;
