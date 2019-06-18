@@ -145,3 +145,9 @@ void MainWidget::on_FM_radioButton_2_clicked(bool checked)
     if (checked == true)
         firstPlayer = PC;
 }
+
+void MainWidget::on_VC_spinBox_valueChanged(int arg1)
+{
+    if (arg1 > ui->fild_size_spinBox->value())
+        ui->VC_spinBox->setValue(ui->fild_size_spinBox->value());
+}

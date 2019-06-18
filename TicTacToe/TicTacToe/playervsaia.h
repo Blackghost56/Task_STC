@@ -10,6 +10,7 @@ class PlayerVsAIA : public QObject
 {
     Q_OBJECT
 private:
+    int maxSize = 10000;
     int size;
     int victorySize;
     int depthAI;
@@ -20,6 +21,7 @@ private:
 
     int AI(QVector<qint8> &cellState, qint8 player);
     int miniMax(QVector<qint8> &cell, int depth, bool isMax);
+    int miniMax(QVector<qint8> &cell, int depth, bool isMax, int alpha, int beta);
     int evaluate(QVector<qint8> &cell);
 
 public:

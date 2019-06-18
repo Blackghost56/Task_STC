@@ -67,16 +67,19 @@ void PlayerVsAIA::cellPressedV(QVector<qint8> cellState, qint8 player)
 int PlayerVsAIA::AI(QVector<qint8> &cellState, qint8 player)
 {
     QVector<qint8> cell(cellState);
-    int bestVal = -1000;
+    int bestVal = -maxSize;
     int bestMove = -1;
     int moveVal;
+    int alpha = bestVal;
+    int beta = -bestVal;
 
     for (int i = 0; i < cell.size(); i++)
     {
         if (cell.at(i) == NOPE)
         {
             cell[i] = AISymbol;
-            moveVal = miniMax(cell, 0, false);
+            //moveVal = miniMax(cell, 0, false);
+            moveVal = miniMax(cell, 0, false, alpha, beta);
             cell[i] = NOPE;
             if (moveVal > bestVal)
             {
@@ -85,14 +88,15 @@ int PlayerVsAIA::AI(QVector<qint8> &cellState, qint8 player)
             }
         }
     }
-    cellState[bestMove] = AISymbol;
+    if (bestMove >= 0)
+        cellState[bestMove] = AISymbol;
     return bestMove;
 }
 
 int PlayerVsAIA::miniMax(QVector<qint8> &cell, int depth, bool isMax)
 {
-    static int count = 0;
-    qDebug() << count++;
+    //static int count = 0;
+    //qDebug() << count++;
 
     int score = evaluate(cell);
 
@@ -111,7 +115,7 @@ int PlayerVsAIA::miniMax(QVector<qint8> &cell, int depth, bool isMax)
 
     if (isMax)
     {
-        int best = -1000;
+        int best = -maxSize;
         for (int i = 0; i < cell.size(); i++)
         {
             if (cell.at(i) == NOPE)
@@ -126,7 +130,7 @@ int PlayerVsAIA::miniMax(QVector<qint8> &cell, int depth, bool isMax)
         }
         return best;
     } else     {
-        int best = 1000;
+        int best = maxSize;
         for (int i = 0; i < cell.size(); i++)
         {
             if (cell.at(i) == NOPE)
@@ -137,6 +141,64 @@ int PlayerVsAIA::miniMax(QVector<qint8> &cell, int depth, bool isMax)
                     best = buf;
                 }
                 cell[i] = NOPE;
+            }
+        }
+        return best;
+    }
+}
+
+int PlayerVsAIA::miniMax(QVector<qint8> &cell, int depth, bool isMax, int alpha, int beta)
+{
+    //static int count = 0;
+    //qDebug() << count++;
+
+    int score = evaluate(cell);
+
+    if (score == 10)
+        return score;
+
+    if (score == -10)
+        return score;
+
+    if (depth > depthAI)
+        return score;
+
+    if (checker->checkMoves(cell) == true)
+        return 0;
+    int buf;
+
+    if (isMax)
+    {
+        int best = alpha;
+        for (int i = 0; i < cell.size(); i++)
+        {
+            if (cell.at(i) == NOPE)
+            {
+                cell[i] = AISymbol;
+                buf = miniMax(cell, depth + 1, !isMax, -alpha, -beta);
+                if (best < buf){
+                    best = buf;
+                }
+                cell[i] = NOPE;
+                if (best >= beta)
+                    return best;
+            }
+        }
+        return best;
+    } else     {
+        int best = beta;
+        for (int i = 0; i < cell.size(); i++)
+        {
+            if (cell.at(i) == NOPE)
+            {
+                cell[i] = playerSymbol;
+                buf = miniMax(cell, depth + 1, !isMax, -alpha, -beta);
+                if (best > buf){
+                    best = buf;
+                }
+                cell[i] = NOPE;
+                if (best <= alpha)
+                    return best;
             }
         }
         return best;

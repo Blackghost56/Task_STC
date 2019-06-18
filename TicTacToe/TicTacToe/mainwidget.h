@@ -39,16 +39,18 @@ private slots:
 
     void on_FM_radioButton_2_clicked(bool checked);
 
+    void on_VC_spinBox_valueChanged(int arg1);
+
 private:
     enum FIRST_MOVE_ENUM: qint8 {PLAYER = 1, PC = 2};
     Ui::MainWidget *ui;
     const int defaultSize = 3;
     const int minSizeDef = 3;
     const int maxSizeDef = 20;
-    const int maxSizeAdv = 4;
+    const int maxSizeAdv = 6;
     const int defaultDifficulty = 3;
     const int minDifficulty = 0;
-    const int maxDifficulty = 3;
+    const int maxDifficulty = 5;
     FIRST_MOVE_ENUM firstPlayer = PLAYER;
     PlayerVsPlayer  *playerVsPlayer = nullptr;
     PlayerVsAIS     *playerVsAIs = nullptr;
