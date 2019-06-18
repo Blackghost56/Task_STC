@@ -12,6 +12,7 @@ class PlayerVsAIA : public QObject
 private:
     int size;
     int victorySize;
+    int depthAI;
     qint8 playerSymbol;
     qint8 AISymbol;
     PlayingField *playField;
@@ -22,7 +23,7 @@ private:
     int evaluate(QVector<qint8> &cell);
 
 public:
-    explicit PlayerVsAIA(PlayingField *field, const int size, const int victorySize, const qint8 playerSymbol, QObject *parent = nullptr);
+    explicit PlayerVsAIA(PlayingField *field, const int size, const int victorySize, const qint8 playerSymbol, const int depth, QObject *parent = nullptr);
     ~PlayerVsAIA();
 
 signals:

@@ -45,7 +45,10 @@ private:
     const int defaultSize = 3;
     const int minSizeDef = 3;
     const int maxSizeDef = 20;
-    const int maxSizeAdv = 3;
+    const int maxSizeAdv = 4;
+    const int defaultDifficulty = 3;
+    const int minDifficulty = 0;
+    const int maxDifficulty = 3;
     FIRST_MOVE_ENUM firstPlayer = PLAYER;
     PlayerVsPlayer  *playerVsPlayer = nullptr;
     PlayerVsAIS     *playerVsAIs = nullptr;

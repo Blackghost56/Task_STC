@@ -18,6 +18,11 @@ MainWidget::MainWidget(QWidget *parent) :
     ui->VC_spinBox->setMinimum(minSizeDef);
     ui->VC_spinBox->setMaximum(ui->fild_size_spinBox->value());
     ui->FM_groupBox->setVisible(false);
+    ui->difficulty_label->setVisible(false);
+    ui->difficulty_spinBox->setVisible(false);
+    ui->difficulty_spinBox->setMinimum(minDifficulty);
+    ui->difficulty_spinBox->setMaximum(maxDifficulty);
+    ui->difficulty_spinBox->setValue(defaultDifficulty);
 }
 
 MainWidget::~MainWidget()
@@ -35,6 +40,8 @@ void MainWidget::on_start_pushButton_clicked()
     ui->start_pushButton->setEnabled(false);
     ui->stop_pushButton->setEnabled(true);
     ui->FM_groupBox->setEnabled(false);
+    ui->difficulty_label->setEnabled(false);
+    ui->difficulty_spinBox->setEnabled(false);
     ui->play_field_widget->enable();
     ui->play_field_widget->clear();
 
@@ -47,7 +54,8 @@ void MainWidget::on_start_pushButton_clicked()
         connect(playerVsAIs, &PlayerVsAIS::endGame, ui->stop_pushButton, &QPushButton::click);
     }
     if (ui->mode_radioButton_3->isChecked()){
-        playerVsAIa = new PlayerVsAIA(ui->play_field_widget, ui->fild_size_spinBox->value(), ui->VC_spinBox->value(), firstPlayer, this);
+        playerVsAIa = new PlayerVsAIA(ui->play_field_widget, ui->fild_size_spinBox->value(), ui->VC_spinBox->value(), firstPlayer,
+                                      ui->difficulty_spinBox->value(), this);
         connect(playerVsAIa, &PlayerVsAIA::endGame, ui->stop_pushButton, &QPushButton::click);
     }
 }
@@ -62,6 +70,8 @@ void MainWidget::on_stop_pushButton_clicked()
     ui->start_pushButton->setEnabled(true);
     ui->stop_pushButton->setEnabled(false);
     ui->FM_groupBox->setEnabled(true);
+    ui->difficulty_label->setEnabled(true);
+    ui->difficulty_spinBox->setEnabled(true);
     ui->play_field_widget->disable();
 
     if (playerVsPlayer != nullptr){
@@ -89,28 +99,39 @@ void MainWidget::on_fild_size_spinBox_valueChanged(int arg1)
 
 void MainWidget::on_mode_radioButton_1_clicked(bool checked)
 {
-    if (checked == true)
+    if (checked == true){
         ui->FM_groupBox->setVisible(false);
+        ui->difficulty_label->setVisible(false);
+        ui->difficulty_spinBox->setVisible(false);
+    }
     ui->fild_size_spinBox->setMaximum(maxSizeDef);
     ui->VC_spinBox->setMaximum(maxSizeDef);
 }
 
 void MainWidget::on_mode_radioButton_2_clicked(bool checked)
 {
-    if (checked == true)
+    if (checked == true){
         ui->FM_groupBox->setVisible(true);
+        ui->difficulty_label->setVisible(false);
+        ui->difficulty_spinBox->setVisible(false);
+    }
     ui->fild_size_spinBox->setMaximum(maxSizeDef);
     ui->VC_spinBox->setMaximum(maxSizeDef);
 }
 
 void MainWidget::on_mode_radioButton_3_clicked(bool checked)
 {
-    if (checked == true)
+    if (checked == true){
         ui->FM_groupBox->setVisible(true);
+        ui->difficulty_label->setVisible(true);
+        ui->difficulty_spinBox->setVisible(true);
+    }
     ui->fild_size_spinBox->setMaximum(maxSizeAdv);
-    ui->fild_size_spinBox->setValue(maxSizeAdv);
+    if (ui->fild_size_spinBox->value() > maxSizeAdv)
+        ui->fild_size_spinBox->setValue(maxSizeAdv);
     ui->VC_spinBox->setMaximum(maxSizeAdv);
-    ui->VC_spinBox->setValue(maxSizeAdv);
+    if (ui->VC_spinBox->value() > maxSizeAdv)
+        ui->VC_spinBox->setValue(maxSizeAdv);
 }
 
 void MainWidget::on_FM_radioButton_1_clicked(bool checked)

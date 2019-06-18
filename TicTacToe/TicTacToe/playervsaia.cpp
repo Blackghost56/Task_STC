@@ -1,12 +1,13 @@
 #include "playervsaia.h"
 
 
-PlayerVsAIA::PlayerVsAIA(PlayingField *field, const int size, const int victorySize, const qint8 playerSymbol, QObject *parent) : QObject(parent)
+PlayerVsAIA::PlayerVsAIA(PlayingField *field, const int size, const int victorySize, const qint8 playerSymbol, const int depth, QObject *parent) : QObject(parent)
 {
     this->size = size;
     this->victorySize = victorySize;
     this->playField = field;
     this->playerSymbol = playerSymbol;
+    this->depthAI = depth;
 
     checker = new WinCheck(size, victorySize, this);
 
@@ -90,12 +91,18 @@ int PlayerVsAIA::AI(QVector<qint8> &cellState, qint8 player)
 
 int PlayerVsAIA::miniMax(QVector<qint8> &cell, int depth, bool isMax)
 {
+    static int count = 0;
+    qDebug() << count++;
+
     int score = evaluate(cell);
 
     if (score == 10)
         return score;
 
     if (score == -10)
+        return score;
+
+    if (depth > depthAI)
         return score;
 
     if (checker->checkMoves(cell) == true)
